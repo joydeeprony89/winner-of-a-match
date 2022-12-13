@@ -13,7 +13,8 @@ Player_ID Group_ID
 
 Matches (All the fields are Integers)
 
-58892-image.png
+https://learn.microsoft.com/answers/storage/attachments/58892-image.png
+
 
 
 A few points.
@@ -47,4 +48,21 @@ Group_ID Winner_ID
 
 3 40
 
+
+
+Answer -
+
+ ;WITH cte1 as 
+         (SELECT P.group_id,P.Player_ID,COALESCE(M.first_score,0) AS Score FROM matches M
+         RIGHT JOIN Players P ON M.first_player = P.Player_id
+         UNION ALL
+         SELECT P.group_id,P.Player_ID,COALESCE(M.Second_score,0) AS Score FROM matches M
+         RIGHT JOIN Players P ON M.Second_player = P.Player_id)
+ ,cte2 as
+       (SELECT Group_ID,Player_ID,SUM(Score) AS Score,ROW_NUmber() OVER (Partition BY group_id Order by suM(score) desc,player_id) AS RNM 
+        FROM cte1
+        GROUP BY GROUP_ID, PLAYER_ID)
+    
+ SELECT GROUP_iD,Player_ID AS Winner_ID FROM cte2
+ WHERE rnm=1
 
