@@ -17,7 +17,7 @@ Player_ID Group_ID
 
 Matches (All the fields are Integers)
 
-https://learn.microsoft.com/answers/storage/attachments/58892-image.png
+<img src='https://learn.microsoft.com/answers/storage/attachments/58892-image.png'/>
 
 
 
@@ -51,7 +51,3 @@ Group_ID Winner_ID
 2 20
 
 3 40
-
-
-
-Answer -
